@@ -6,11 +6,13 @@ use Closure;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\Contracts\CanConcealComponents;
 use Filament\Support\Concerns\HasIcon;
+use Filament\Support\Concerns\HasIconColor;
 use Illuminate\Support\Str;
 
 class Tab extends Component implements CanConcealComponents
 {
     use HasIcon;
+    use HasIconColor;
 
     /**
      * @var view-string

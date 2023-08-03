@@ -22,9 +22,15 @@
 
     $iconClasses = 'fi-tabs-item-icon h-5 w-5';
 
-    $inactiveIconClasses = 'text-gray-400 dark:text-gray-500';
+    $inactiveIconClasses = match ($iconColor) {
+        'gray' => 'text-gray-400 dark:text-gray-500',
+        default => 'text-custom-400 dark:text-custom-500',
+    };
 
-    $activeIconClasses = 'text-primary-600 dark:text-primary-400';
+    $activeIconClasses = match ($iconColor) {
+        'gray' => 'text-primary-600 dark:text-primary-400',
+        default => 'text-custom-600 dark:text-custom-400',
+    };
 @endphp
 
 <{{ $tag }}
@@ -59,6 +65,9 @@
                 $inactiveIconClasses => (! $hasAlpineActiveClasses) && (! $active),
                 $activeIconClasses => (! $hasAlpineActiveClasses) && $active,
             ])
+            @style([
+                \Filament\Support\get_color_css_variables($iconColor, shades: [400, 500]) => $iconColor !== 'gray',
+            ])
         />
     @endif
 
@@ -74,6 +83,9 @@
                 $iconClasses,
                 $inactiveIconClasses => (! $hasAlpineActiveClasses) && (! $active),
                 $activeIconClasses => (! $hasAlpineActiveClasses) && $active,
+            ])
+            @style([
+                \Filament\Support\get_color_css_variables($iconColor, shades: [400, 500]) => $iconColor !== 'gray',
             ])
         />
     @endif
